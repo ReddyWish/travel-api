@@ -44,7 +44,7 @@ model TourCategory {
   tourId     Int      @db.Integer
   categoryId Int      @db.Integer
   createdAt  DateTime @default(now()) @db.Timestamptz(3)
-  tour       Tour     @relation(fields: [tourId], references: [id])
+  tour       Tour     @relation(fields: [tourId], references: [id], onDelete: Cascade, onUpdate: Cascade)
   category   Category @relation(fields: [categoryId], references: [id], onDelete: Cascade, onUpdate: Cascade)
 
   @@index([tourId])

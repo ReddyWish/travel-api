@@ -4,25 +4,7 @@ export const createTour: NonNullable<MutationResolvers['createTour']> = async (
   _arg,
   _ctx,
 ) => {
-  const { categoryIds, ...tourData } = _arg.input;
-
-  const tour = await _ctx.prisma.tour.create({
-    data: {
-      ...tourData,
-      categories: categoryIds
-        ? {
-            create: categoryIds.map((id) => ({ categoryId: parseInt(id) })),
-          }
-        : undefined,
-    },
-    include: {
-      categories: {
-        include: {
-          category: true,
-        },
-      },
-    },
-  });
+  const tour = await _ctx.tourServices.create(_arg);
 
   return {
     ...tour,

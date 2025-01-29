@@ -4,9 +4,5 @@ export const deleteTour: NonNullable<MutationResolvers['deleteTour']> = async (
   _arg,
   _ctx,
 ) => {
-  return await _ctx.prisma.tour.delete({
-    where: {
-      id: parseInt(_arg.id),
-    },
-  });
+  return await _ctx.tourServices.delete(_arg);
 };
