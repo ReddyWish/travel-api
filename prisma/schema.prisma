@@ -1,0 +1,53 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+// Looking for ways to speed up your queries, or scale easily with your serverless or edge functions?
+// Try Prisma Accelerate: https://pris.ly/cli/accelerate-init
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model Tour {
+  id               Int      @id @default(autoincrement()) @db.Integer
+  title            String   @db.Text
+  shortDescription String?  @db.Text
+  description      String?  @db.Text
+  isDirectBooking  Boolean  @default(false) @db.Boolean
+  location         String?  @db.Text
+  durationDays     Int      @default(1) @db.Integer
+  includes         String?  @db.Text
+  excludes         String?  @db.Text
+  createdAt        DateTime @default(now()) @db.Timestamptz(3)
+  updatedAt        DateTime @default(now()) @db.Timestamptz(3)
+
+  categories      TourCategory[]
+}
+
+model Category {
+  id          Int            @id @default(autoincrement()) @db.Integer
+  name        String         @db.Text
+  description String?        @db.Text
+  createdAt   DateTime       @default(now()) @db.Timestamptz(3)
+  updatedAt   DateTime       @default(now()) @db.Timestamptz(3)
+
+  tours       TourCategory[]
+}
+
+model TourCategory {
+  id         Int      @id @default(autoincrement()) @db.Integer
+  tourId     Int      @db.Integer
+  categoryId Int      @db.Integer
+  createdAt  DateTime @default(now()) @db.Timestamptz(3)
+  tour       Tour     @relation(fields: [tourId], references: [id])
+  category   Category @relation(fields: [categoryId], references: [id], onDelete: Cascade, onUpdate: Cascade)
+
+  @@index([tourId])
+  @@index([categoryId])
+  @@unique([tourId, categoryId])
+}

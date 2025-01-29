@@ -1,0 +1,49 @@
+extend type Query {
+    tours: [Tour!]!
+    tour(id: ID!): Tour
+}
+
+extend type Mutation {
+    createTour(input: TourCreateInput!): Tour!
+    updateTour(id: ID!, input: TourUpdateInput!): Tour!
+    deleteTour(id: ID!): Tour!
+}
+
+input TourCreateInput {
+    title: String!
+    shortDescription: String
+    description: String
+    isDirectBooking: Boolean!
+    location: String
+    durationDays: Int!
+    includes: String
+    excludes: String
+    categoryIds: [ID!]
+}
+
+input TourUpdateInput {
+    title: String
+    shortDescription: String
+    description: String
+    isDirectBooking: Boolean
+    location: String
+    durationDays: Int
+    includes: String
+    excludes: String
+    categoryIds: [ID!]!
+}
+
+type Tour {
+    id: ID!
+    title: String!
+    shortDescription: String
+    description: String
+    isDirectBooking: Boolean!
+    location: String
+    durationDays: Int!
+    includes: String
+    excludes: String
+    createdAt: DateTime!
+    updatedAt: DateTime!
+    categories: [Category!]
+}
