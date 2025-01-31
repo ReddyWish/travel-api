@@ -7,21 +7,17 @@ export class CreateTourService {
   async execute(_arg: RequireFields<MutationcreateTourArgs, 'input'>) {
     const { categoryIds, ...tourData } = _arg.input;
 
-    return await this.prisma.tour.create({
+    return this.prisma.tour.create({
       data: {
         ...tourData,
-        categories: categoryIds
+        categories: categoryIds?.length
           ? {
-              create: categoryIds.map((id) => ({ categoryId: parseInt(id) })),
+              connect: categoryIds.map((id) => ({ id: parseInt(id) })),
             }
           : undefined,
       },
       include: {
-        categories: {
-          include: {
-            category: true,
-          },
-        },
+        categories: true,
       },
     });
   }

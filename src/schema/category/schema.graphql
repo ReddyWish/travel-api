@@ -25,4 +25,5 @@ type Category {
     description: String
     createdAt: DateTime!
     updatedAt: DateTime!
+    tours: [Tour!]
 }

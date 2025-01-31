@@ -1,14 +1,17 @@
 import { PrismaClient } from '@prisma/client';
-import { ServicesRegistry } from './schema/tour/services/services.registry';
+import { TourServicesRegistry } from './schema/tour/services/services.registry';
+import { CategoryServicesRegistry } from './schema/category/services/services.registry';
 
 const prisma = new PrismaClient();
-const tourServices = new ServicesRegistry(prisma);
+const tourServices = new TourServicesRegistry(prisma);
+const categoryServices = new CategoryServicesRegistry(prisma);
 
 export type GraphQLContext = {
   prisma: PrismaClient;
-  tourServices: ServicesRegistry;
+  tourServices: TourServicesRegistry;
+  categoryServices: CategoryServicesRegistry;
 };
 
 export async function createContext(): Promise<GraphQLContext> {
-  return { prisma, tourServices };
+  return { prisma, tourServices, categoryServices };
 }

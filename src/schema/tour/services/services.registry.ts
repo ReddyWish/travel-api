@@ -9,7 +9,7 @@ import {
 } from '../../types.generated';
 import { DeleteTourService } from './delete-tour.service';
 
-export class ServicesRegistry {
+export class TourServicesRegistry {
   private prisma: PrismaClient;
   private createTourService!: CreateTourService;
   private updateTourService!: UpdateTourService;

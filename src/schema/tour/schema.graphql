@@ -45,5 +45,5 @@ type Tour {
     excludes: String
     createdAt: DateTime!
     updatedAt: DateTime!
-    categories: [Category!]
+    categories: [Category!]!
 }

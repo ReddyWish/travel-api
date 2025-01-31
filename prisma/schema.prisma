@@ -26,7 +26,7 @@ model Tour {
   createdAt        DateTime @default(now()) @db.Timestamptz(3)
   updatedAt        DateTime @default(now()) @db.Timestamptz(3)
 
-  categories      TourCategory[]
+  categories      Category[]
 }
 
 model Category {
@@ -36,18 +36,5 @@ model Category {
   createdAt   DateTime       @default(now()) @db.Timestamptz(3)
   updatedAt   DateTime       @default(now()) @db.Timestamptz(3)
 
-  tours       TourCategory[]
-}
-
-model TourCategory {
-  id         Int      @id @default(autoincrement()) @db.Integer
-  tourId     Int      @db.Integer
-  categoryId Int      @db.Integer
-  createdAt  DateTime @default(now()) @db.Timestamptz(3)
-  tour       Tour     @relation(fields: [tourId], references: [id], onDelete: Cascade, onUpdate: Cascade)
-  category   Category @relation(fields: [categoryId], references: [id], onDelete: Cascade, onUpdate: Cascade)
-
-  @@index([tourId])
-  @@index([categoryId])
-  @@unique([tourId, categoryId])
+  tours       Tour[]
 }

@@ -5,9 +5,12 @@ export class DeleteTourService {
   constructor(private prisma: PrismaClient) {}
 
   async execute(_arg: RequireFields<MutationdeleteTourArgs, 'id'>) {
-    return await this.prisma.tour.delete({
+    return this.prisma.tour.delete({
       where: {
         id: parseInt(_arg.id),
+      },
+      include: {
+        categories: true,
       },
     });
   }
