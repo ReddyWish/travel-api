@@ -3,12 +3,14 @@ import { TourServicesRegistry } from './schema/tour/services/services.registry';
 import { CategoryServicesRegistry } from './schema/category/services/services.registry';
 import { TourPriceServicesRegistry } from './schema/tourPrice/services/services.registry';
 import { CurrencyServicesRegistry } from './schema/currency/services/services.registry';
+import { TourProgramServicesRegistry } from './schema/tourProgram/services/services.registry';
 
 const prisma = new PrismaClient();
 const tourService = new TourServicesRegistry(prisma);
 const tourPriceService = new TourPriceServicesRegistry(prisma);
 const currencyService = new CurrencyServicesRegistry(prisma);
 const categoryService = new CategoryServicesRegistry(prisma);
+const tourProgramService = new TourProgramServicesRegistry(prisma);
 
 export type GraphQLContext = {
   prisma: PrismaClient;
@@ -16,6 +18,7 @@ export type GraphQLContext = {
   tourPriceService: TourPriceServicesRegistry;
   currencyService: CurrencyServicesRegistry;
   categoryService: CategoryServicesRegistry;
+  tourProgramService: TourProgramServicesRegistry;
 };
 
 export async function createContext(): Promise<GraphQLContext> {
@@ -25,5 +28,6 @@ export async function createContext(): Promise<GraphQLContext> {
     tourPriceService,
     currencyService,
     categoryService,
+    tourProgramService,
   };
 }

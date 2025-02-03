@@ -4,5 +4,5 @@ export const updateTour: NonNullable<MutationResolvers['updateTour']> = async (
   _arg,
   _ctx,
 ) => {
-  return _ctx.tourServices.update(_arg);
+  return _ctx.tourService.update(_arg);
 };

@@ -20,6 +20,7 @@ input TourCreateInput {
     excludes: String
     categoryIds: [ID!]
     price: [TourPriceCreateInput!]!
+    program: [TourProgramFragmentCreateInput!]
 }
 
 input TourUpdateInput {
@@ -33,6 +34,7 @@ input TourUpdateInput {
     excludes: String
     categoryIds: [ID!]!
     price: [TourPriceCreateInput!]
+    program: [TourProgramFragmentCreateInput!]
 }
 
 type Tour {
@@ -46,6 +48,7 @@ type Tour {
     includes: String
     excludes: String
     price: [TourPrice!]!
+    program: [TourProgramFragment!]!
     createdAt: DateTime!
     updatedAt: DateTime!
     categories: [Category!]!

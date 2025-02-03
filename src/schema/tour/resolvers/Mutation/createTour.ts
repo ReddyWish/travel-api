@@ -4,5 +4,5 @@ export const createTour: NonNullable<MutationResolvers['createTour']> = async (
   _arg,
   _ctx,
 ) => {
-  return await _ctx.tourServices.create(_arg);
+  return await _ctx.tourService.create(_arg);
 };

@@ -16,6 +16,7 @@ export class DeleteTourService {
             currency: true,
           },
         },
+        program: true,
       },
     });
   }

@@ -5,7 +5,7 @@ export class UpdateTourService {
   constructor(private prisma: PrismaClient) {}
 
   async execute(_arg: RequireFields<MutationupdateTourArgs, 'input' | 'id'>) {
-    const { categoryIds, price, ...tourData } = _arg.input;
+    const { categoryIds, price, program, ...tourData } = _arg.input;
 
     return this.prisma.tour.update({
       where: {
@@ -29,6 +29,18 @@ export class UpdateTourService {
               })),
             }
           : undefined,
+        program: {
+          deleteMany: {},
+          ...(program?.length
+            ? {
+                create: program.map((fragment) => ({
+                  order: fragment.order,
+                  title: fragment.title,
+                  description: fragment.description,
+                })),
+              }
+            : {}),
+        },
       },
       include: {
         categories: true,
@@ -37,6 +49,7 @@ export class UpdateTourService {
             currency: true,
           },
         },
+        program: true,
       },
     });
   }
