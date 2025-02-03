@@ -5,7 +5,7 @@ export class CreateTourService {
   constructor(private prisma: PrismaClient) {}
 
   async execute(_arg: RequireFields<MutationcreateTourArgs, 'input'>) {
-    const { categoryIds, ...tourData } = _arg.input;
+    const { categoryIds, price, ...tourData } = _arg.input;
 
     return this.prisma.tour.create({
       data: {
@@ -15,9 +15,24 @@ export class CreateTourService {
               connect: categoryIds.map((id) => ({ id: parseInt(id) })),
             }
           : undefined,
+        price: price
+          ? {
+              createMany: {
+                data: price.map((p) => ({
+                  currencyId: parseInt(p.currencyId),
+                  amount: p.amount,
+                })),
+              },
+            }
+          : undefined,
       },
       include: {
         categories: true,
+        price: {
+          include: {
+            currency: true,
+          },
+        },
       },
     });
   }

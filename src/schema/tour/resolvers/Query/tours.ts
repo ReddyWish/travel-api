@@ -1,4 +1,4 @@
-import type   { QueryResolvers } from './../../../types.generated';
+import type { QueryResolvers } from './../../../types.generated';
 
 export const tours: NonNullable<QueryResolvers['tours']> = async (
   _parent,
@@ -8,6 +8,11 @@ export const tours: NonNullable<QueryResolvers['tours']> = async (
   return _ctx.prisma.tour.findMany({
     include: {
       categories: true,
+      price: {
+        include: {
+          currency: true,
+        },
+      },
     },
   });
 };

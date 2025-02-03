@@ -1,5 +1,4 @@
-import type   { QueryResolvers } from './../../../types.generated';
-
+import type { QueryResolvers } from './../../../types.generated';
 
 export const tour: NonNullable<QueryResolvers['tour']> = async (
   _parent,
@@ -12,6 +11,11 @@ export const tour: NonNullable<QueryResolvers['tour']> = async (
     },
     include: {
       categories: true,
+      price: {
+        include: {
+          currency: true,
+        },
+      },
     },
   });
 };

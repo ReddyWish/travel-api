@@ -11,6 +11,11 @@ export class DeleteTourService {
       },
       include: {
         categories: true,
+        price: {
+          include: {
+            currency: true,
+          },
+        },
       },
     });
   }
