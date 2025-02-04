@@ -17,6 +17,7 @@ export class DeleteTourService {
           },
         },
         program: true,
+        images: true,
       },
     });
   }

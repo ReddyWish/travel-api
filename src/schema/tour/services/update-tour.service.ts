@@ -5,7 +5,7 @@ export class UpdateTourService {
   constructor(private prisma: PrismaClient) {}
 
   async execute(_arg: RequireFields<MutationupdateTourArgs, 'input' | 'id'>) {
-    const { categoryIds, price, program, ...tourData } = _arg.input;
+    const { categoryIds, price, program, images, ...tourData } = _arg.input;
 
     return this.prisma.tour.update({
       where: {
@@ -41,6 +41,16 @@ export class UpdateTourService {
               }
             : {}),
         },
+        images: {
+          deleteMany: {},
+          ...(images?.length
+            ? {
+                create: images.map((image) => ({
+                  url: image.url,
+                })),
+              }
+            : {}),
+        },
       },
       include: {
         categories: true,
@@ -50,6 +60,7 @@ export class UpdateTourService {
           },
         },
         program: true,
+        images: true,
       },
     });
   }

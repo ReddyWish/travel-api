@@ -1,5 +1,4 @@
 import type { QueryResolvers } from './../../../types.generated';
-
 export const tour: NonNullable<QueryResolvers['tour']> = async (
   _parent,
   _arg,
@@ -16,6 +15,7 @@ export const tour: NonNullable<QueryResolvers['tour']> = async (
           currency: true,
         },
       },
+      program: true,
       images: true,
     },
   });

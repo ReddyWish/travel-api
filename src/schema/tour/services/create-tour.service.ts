@@ -5,7 +5,7 @@ export class CreateTourService {
   constructor(private prisma: PrismaClient) {}
 
   async execute(_arg: RequireFields<MutationcreateTourArgs, 'input'>) {
-    const { categoryIds, price, program, ...tourData } = _arg.input;
+    const { categoryIds, price, program, images, ...tourData } = _arg.input;
 
     return this.prisma.tour.create({
       data: {
@@ -34,6 +34,13 @@ export class CreateTourService {
               })),
             }
           : undefined,
+        images: images?.length
+          ? {
+              create: images.map((image) => ({
+                url: image.url,
+              })),
+            }
+          : undefined,
       },
       include: {
         categories: true,
@@ -43,6 +50,7 @@ export class CreateTourService {
           },
         },
         program: true,
+        images: true,
       },
     });
   }

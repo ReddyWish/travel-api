@@ -21,7 +21,7 @@ input TourCreateInput {
     categoryIds: [ID!]
     price: [TourPriceCreateInput!]!
     program: [TourProgramFragmentCreateInput!]
-    images: [TourImageInput]
+    images: [TourImageInput!]
 }
 
 input TourUpdateInput {
@@ -36,7 +36,7 @@ input TourUpdateInput {
     categoryIds: [ID!]!
     price: [TourPriceCreateInput!]
     program: [TourProgramFragmentCreateInput!]
-    images: [TourImageInput]
+    images: [TourImageInput!]
 }
 
 type Tour {
