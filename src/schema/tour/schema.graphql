@@ -21,6 +21,7 @@ input TourCreateInput {
     categoryIds: [ID!]
     price: [TourPriceCreateInput!]!
     program: [TourProgramFragmentCreateInput!]
+    images: [TourImageInput]
 }
 
 input TourUpdateInput {
@@ -35,6 +36,7 @@ input TourUpdateInput {
     categoryIds: [ID!]!
     price: [TourPriceCreateInput!]
     program: [TourProgramFragmentCreateInput!]
+    images: [TourImageInput]
 }
 
 type Tour {
@@ -52,4 +54,5 @@ type Tour {
     createdAt: DateTime!
     updatedAt: DateTime!
     categories: [Category!]!
+    images: [TourImage!]!
 }

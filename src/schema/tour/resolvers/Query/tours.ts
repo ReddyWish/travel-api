@@ -14,6 +14,7 @@ export const tours: NonNullable<QueryResolvers['tours']> = async (
         },
       },
       program: true,
+      images: true,
     },
   });
 };

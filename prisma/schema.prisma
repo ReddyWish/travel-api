@@ -28,6 +28,16 @@ model Tour {
   price            TourPrice[]
   categories       Category[]
   program          TourProgramFragment[]
+  images           TourImage[]
+}
+
+model TourImage {
+  id          Int      @id @default(autoincrement()) @db.Integer
+  tour        Tour     @relation(fields: [tourId], references: [id], onDelete: Cascade, onUpdate: Cascade)
+  tourId      Int      @db.Integer
+  url         String   @db.Text
+  createdAt   DateTime @default(now()) @db.Timestamptz(3)
+  updatedAt   DateTime @default(now()) @db.Timestamptz(3)
 }
 
 

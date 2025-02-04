@@ -1,0 +1,20 @@
+extend type Query {
+    tourImage(tourId: ID!): [TourImage!]!
+}
+
+extend type Mutation {
+    createTourImage(tourId: ID!, input: [TourImageInput!]!): [TourImage!]!
+    updateTourImage(tourId: ID!, input: [TourImageInput!]!): [TourImage!]!
+    deleteTourImage(tourId: ID!): [TourImage!]!
+}
+
+input TourImageInput {
+    url: String!
+}
+
+type TourImage {
+    id: ID!
+    url: String!
+    createdAt: DateTime!
+    updatedAt: DateTime!
+}
